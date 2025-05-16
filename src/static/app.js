@@ -41,6 +41,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ...existing code...
+
+function renderActivities(activities) {
+  const activitiesList = document.getElementById("activities-list");
+  activitiesList.innerHTML = "";
+
+  Object.entries(activities).forEach(([name, activity]) => {
+    const card = document.createElement("div");
+    card.className = "activity-card";
+
+    card.innerHTML = `
+      <h4>${name}</h4>
+      <p><strong>Description:</strong> ${activity.description}</p>
+      <p><strong>Schedule:</strong> ${activity.schedule}</p>
+      <p><strong>Max Participants:</strong> ${activity.max_participants}</p>
+      <div class="participants-section">
+        <strong>Participants:</strong>
+        ${
+          activity.participants.length > 0
+            ? `<ul class="participants-list">
+                ${activity.participants
+                  .map(
+                    (email) =>
+                      `<li><span class="participant-avatar">${email
+                        .charAt(0)
+                        .toUpperCase()}</span> ${email}</li>`
+                  )
+                  .join("")}
+              </ul>`
+            : `<p class="no-participants">No participants yet.</p>`
+        }
+      </div>
+    `;
+    activitiesList.appendChild(card);
+  });
+}
+
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();

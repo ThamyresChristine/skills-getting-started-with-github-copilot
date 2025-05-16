@@ -87,35 +87,25 @@ def root():
 def get_activities():
     return activities
 
+# ...existing code...
 
 @app.post("/activities/{activity_name}/signup")
 def signup_for_activity(activity_name: str, email: str):
     """Sign up a student for an activity"""
-    # Validate activity exists
+    # Valida se a atividade existe
     if activity_name not in activities:
         raise HTTPException(status_code=404, detail="Activity not found")
 
-    # Get the specificy activity
     activity = activities[activity_name]
 
+    # Verifica se o estudante já está inscrito
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
 
-    # Validate student is not already signed up
-    @app.post("/activities/{activity_name}/signup")
-    def signup_for_activity(activity_name: str, email: str):
-        """Sign up a student for an activity"""
-        # Validate activity exists
-        if activity_name not in activities:
-            raise HTTPException(status_code=404, detail="Activity not found")
+    # Verifica se atingiu o limite de participantes
+        if len(activity["participants"]) >= activity["max_participants"]:
+            raise HTTPException(status_code=400, detail="Activity is full")
 
-        # Get the specificy activity
-        activity = activities[activity_name]
-
-        # Add student
-        activity["participants"].append(email)
-        return {"message": f"Signed up {email} for {activity_name}"}
-
-    # Add student
+    # Adiciona o estudante
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
-
-
