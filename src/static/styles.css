@@ -35,6 +35,67 @@ main {
   justify-content: center;
 }
 
+/* ...existing code... */
+
+.activity-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.activity-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.participants-section {
+  margin-top: 1rem;
+  background: #f7f7fa;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+.participants-list {
+  list-style: disc inside;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+}
+
+.participants-list li {
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.98rem;
+}
+
+.participant-avatar {
+  display: inline-block;
+  width: 1.7em;
+  height: 1.7em;
+  background: #4f8cff;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 1.7em;
+  font-weight: bold;
+  margin-right: 0.7em;
+  font-size: 1em;
+  box-shadow: 0 1px 3px rgba(79,140,255,0.12);
+}
+
+.no-participants {
+  color: #888;
+  font-style: italic;
+  margin: 0.3em 0 0 0;
+}
+
+/* ...existing code... */
+
+
+
+
 @media (min-width: 768px) {
   main {
     grid-template-columns: 2fr 1fr;
